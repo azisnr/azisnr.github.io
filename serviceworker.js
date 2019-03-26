@@ -1,14 +1,19 @@
-var CACHE_NAME = 'monster-university-web-cache-v1';
+var CACHE_NAME = 'end-games-web-cache-v1';
 var urlsToCache = [
   '/',
   '/css/main.css',
+  '/css/mains.css',
+  '/css/util.css',
   '/js/main.js',
-  '/images/logo-monster.png',
   '/js/jquery.min.js',
   '/wow.css',
   '/wow.js',
   '/serviceworker.js',
   'manifest.json',
+  'fonts/poppins/Poppins-Bold.ttf',
+  'fonts/poppins/Poppins-Regular.ttf',
+  'fonts/poppins/Poppins-Medium.ttf',
+  '/images/icons/icon-96x96.png',
   '/css/bootstrap.css'
 ];
 self.addEventListener('install', function (event) {
@@ -43,44 +48,16 @@ self.addEventListener('activate', function (event) {
 
 /* fetch cache */
 self.addEventListener('fetch', function (event) {
-  var request = event.request;
-  var url = new URL(request.url);
-
-  // memisahkan cache  file dengan cache data API
-  if (url.origin === location.origin){
-      event.respondWith(
-          caches.match(request).then(function (response) {
-              return response || fetch(request);
-          })
-      )
-  } else{
-      event.respondWith(
-          caches.open('list-mahasiswa-cache-v1')
-              .then(function (cache) {
-              return fetch(request).then(function (liveRequest) {
-                  cache.put(request, liveRequest.clone());
-                  return liveRequest;
-              }).catch(function () {
-                  return caches.match(request)
-                      .then(function (response) {
-                      if (response) return response;
-                      return caches.match('/fallback.json');
-                  })
-              })
-          })
-      )
-  }
-
-  // event.respondWith(
-  //     caches.match(event.request)
-  //         .then(function (response) {
-  //         console.log(response);
-  //         if (response){
-  //             return response;
-  //         }
-  //         return fetch(event.request);
-  //     })
-  // )
+  event.respondWith(
+      caches.match(event.request)
+          .then(function (response) {
+          console.log(response);
+          if (response){
+              return response;
+          }
+          return fetch(event.request);
+      })
+  )
 });
 
 self.addEventListener('notificationClose', function (n){
@@ -99,7 +76,7 @@ self.addEventListener('notificationclick', function (n){
     if(action === 'close'){
         notification.close();
     }else{
-        clients.openWindow('https://www.github.com/dimput/');
+        clients.openWindow('https://www.marvel.com/movies/avengers-endgame');
         notification.close();
     }
 

@@ -1,8 +1,8 @@
 {
-  "name": "Monster University",
-  "short_name": "MU",
-  "theme_color": "#2196f3",
-  "background_color": "#74c1ff",
+  "name": "End Games",
+  "short_name": "EndGames",
+  "theme_color": "#ffffff",
+  "background_color": "#2196f3",
   "display": "fullscreen",
   "orientation": "portrait",
   "Scope": "/",
